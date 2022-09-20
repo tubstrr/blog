@@ -8,3 +8,20 @@
 <script setup>
 	const { post } = defineProps(["post"]);
 </script>
+
+<style lang="scss">
+	.post-meta {
+		margin-bottom: 0.2em;
+		margin-bottom: 0.5rem;
+		* {
+			text-transform: uppercase;
+			font-size: 1em;
+			color: $black;
+			opacity: 0.9;
+		}
+
+		.category {
+			margin-right: 0.5em;
+		}
+	}
+</style>

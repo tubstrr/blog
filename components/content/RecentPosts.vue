@@ -5,12 +5,15 @@
 			v-for="(post, index) in posts"
 			:key="`${post.title}-${index}`"
 			:id="`${post.category}-${post.post_number}`"
+			title="post.title"
 			:category="post.category"
 		>
-			<post-meta :post="post" />
-			<h3 v-html="post.title" />
-			<p class="description" v-html="post.description" />
-			<!-- <read-more :title="Read more" :link="post._path" /> -->
+			<NuxtLink :to="post._path" class="no-line">
+				<post-meta :post="post" />
+				<h2 v-html="post.title" />
+				<p class="description" v-html="post.description" />
+				<read-more title="Read more" :link="post._path" />
+			</NuxtLink>
 		</article>
 	</section>
 </template>
@@ -30,33 +33,68 @@
 			margin-bottom: 0.25rem;
 		}
 		article {
+			--timing: 330ms;
+			--function: #{$in-out};
+			--transition: var(--timing) var(--function);
+
 			background: $white;
-			padding: 2rem;
 			border: 1px solid $black;
 			margin-top: 1rem;
+			margin-right: calc(2rem + 1em);
+			box-shadow: 1em 1em var(--box-shadow-color);
+			position: relative;
+			transition: var(--transition);
 
 			+ article {
 				margin-top: 3rem;
 			}
 
 			&[category="tutorial"] {
-				@include box-shadow($blue);
+				--box-shadow-color: #{$blue};
 			}
 			&[category="solution"] {
-				@include box-shadow($pink);
+				--box-shadow-color: #{$pink};
 			}
 			&[category="deep-dive"] {
-				@include box-shadow($yellow);
+				--box-shadow-color: #{$yellow};
 			}
 
-			.post-meta {
-				margin-bottom: 0.2em;
-				font-size: 0.75em;
-				margin-bottom: 0.5rem;
-				text-transform: uppercase;
-			}
-			.description {
-				margin-top: 1em;
+			> a {
+				&:hover,
+				&:focus,
+				&:active {
+					// box-shadow: 0.75em 0.75em 0 0px var(--box-shadow-color);
+					opacity: 0.9;
+
+					&:before {
+						clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%, 0 0);
+					}
+				}
+				&:before {
+					content: "";
+					position: absolute;
+					pointer-events: none;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					border: 2px dashed $black;
+					clip-path: polygon(100% 0, 100% 0, 100% 0, 0 100%, 0 100%, 0 100%);
+
+					transition: var(--transition);
+				}
+				padding: 2rem;
+				display: block;
+
+				.post-meta {
+					margin-bottom: 0.2em;
+					font-size: 0.75em;
+					margin-bottom: 0.5rem;
+					text-transform: uppercase;
+				}
+				.description {
+					margin-top: 1em;
+				}
 			}
 		}
 	}
