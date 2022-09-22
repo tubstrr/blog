@@ -1,6 +1,6 @@
 <template>
 	<footer id="footer" class="container">
-		<NuxtLink to="/">the archive</NuxtLink>
+		<NuxtLink to="/" class="no-line">the archive</NuxtLink>
 	</footer>
 </template>
 

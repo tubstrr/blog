@@ -16,7 +16,7 @@
 		* {
 			text-transform: uppercase;
 			font-size: 1em;
-			color: $black;
+			color: var(--black);
 			opacity: 0.9;
 		}
 

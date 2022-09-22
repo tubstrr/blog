@@ -1,6 +1,6 @@
 <template>
 	<header id="header" class="container">
-		<NuxtLink to="/">the archive</NuxtLink>
+		<NuxtLink to="/" class="no-line">the archive</NuxtLink>
 		<button class="hamburger">
 			<span class="top" />
 			<span class="mid" />

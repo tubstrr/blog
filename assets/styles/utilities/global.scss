@@ -1,6 +1,23 @@
+html {
+	// Colors
+	--black: #{$black};
+	--white: #{$white};
+	--gray: #{$gray};
+
+	--yellow: #{$yellow};
+	--blue: #{$blue};
+	--light-blue: #{$light-blue};
+	--pink: #{$pink};
+	--green: #{$green};
+	--purple: #{$purple};
+
+	// Animations
+	--in-out: #{$in-out};
+}
+
 html,
 #root {
-	background-color: $gray;
+	background-color: var(--gray);
 }
 
 .container {

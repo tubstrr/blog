@@ -12,7 +12,7 @@
 				<post-meta :post="post" />
 				<h2 v-html="post.title" />
 				<p class="description" v-html="post.description" />
-				<read-more title="Read more" :link="post._path" />
+				<read-more title="Read article" :link="post._path" />
 			</NuxtLink>
 		</article>
 	</section>
@@ -33,12 +33,12 @@
 			margin-bottom: 0.25rem;
 		}
 		article {
-			--timing: 330ms;
-			--function: #{$in-out};
+			--timing: 250ms;
+			--function: var(--in-out);
 			--transition: var(--timing) var(--function);
 
-			background: $white;
-			border: 1px solid $black;
+			background: var(--white);
+			border: 1px solid var(--black);
 			margin-top: 1rem;
 			margin-right: calc(2rem + 1em);
 			box-shadow: 1em 1em var(--box-shadow-color);
@@ -50,20 +50,19 @@
 			}
 
 			&[category="tutorial"] {
-				--box-shadow-color: #{$blue};
+				--box-shadow-color: var(--blue);
 			}
 			&[category="solution"] {
-				--box-shadow-color: #{$pink};
+				--box-shadow-color: var(--pink);
 			}
 			&[category="deep-dive"] {
-				--box-shadow-color: #{$yellow};
+				--box-shadow-color: var(--green);
 			}
 
 			> a {
 				&:hover,
 				&:focus,
 				&:active {
-					// box-shadow: 0.75em 0.75em 0 0px var(--box-shadow-color);
 					opacity: 0.9;
 
 					&:before {
@@ -78,10 +77,11 @@
 					left: 0;
 					width: 100%;
 					height: 100%;
-					border: 2px dashed $black;
+					border: 2px dashed var(--black);
 					clip-path: polygon(100% 0, 100% 0, 100% 0, 0 100%, 0 100%, 0 100%);
 
 					transition: var(--transition);
+					transition-delay: 200ms;
 				}
 				padding: 2rem;
 				display: block;
