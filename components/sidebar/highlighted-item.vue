@@ -32,7 +32,7 @@
 			a {
 				width: 100%;
 				border: 1px solid var(--black);
-				box-shadow: 0.25em 0.25em 0 var(--color);
+				// box-shadow: 0.25em 0.25em 0 var(--color);
 				background: var(--white);
 				padding: 0.7em;
 				overflow: hidden;
@@ -78,7 +78,7 @@
 				&:focus,
 				&:active {
 					opacity: 1;
-					box-shadow: 0px 0px 0 var(--color);
+					// box-shadow: 0px 0px 0 var(--color);
 					border: 1px solid transparent;
 					background: transparent;
 					color: var(--white);

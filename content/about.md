@@ -2,6 +2,8 @@
 type: page
 ---
 
-# About Content v2
+# About Me
+
+## I'm a front-end web developer
 
 [Back home](/)

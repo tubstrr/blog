@@ -10,5 +10,6 @@
 		display: grid;
 		grid-template-columns: 1fr 400px;
 		grid-gap: 2rem;
+		align-items: flex-start;
 	}
 </style>

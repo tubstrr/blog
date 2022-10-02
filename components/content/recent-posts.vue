@@ -1,6 +1,6 @@
 <template>
 	<section id="recent-posts">
-		<h2>Recent posts</h2>
+		<h2>{{ title }}</h2>
 		<article
 			v-for="(post, index) in posts"
 			:key="`${post.title}-${index}`"
@@ -19,8 +19,22 @@
 </template>
 
 <script setup>
+	const { category, title } = defineProps({
+		category: {
+			type: [String, Boolean],
+			default: false
+		},
+		title: {
+			type: String,
+			default: "Recent Posts"
+		}
+	});
+
+	let categories = ["deep-dive", "solution", "tutorial"];
+	if (category) categories = [category];
+
 	const posts = await queryContent()
-		.where({ type: "post" })
+		.where({ type: "post", category: { $in: categories } })
 		.sort({ post_number: -1, date: -1 })
 		.limit(5)
 		.only(["title", "description", "date", "updated", "category", "post_number", "_path"])

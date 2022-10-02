@@ -1,4 +1,4 @@
-a:not(.no-line) {
+a:not(.no-line, [href^="#"]) {
 	--color: var(--blue);
 	color: var(--color);
 	text-decoration: none;
@@ -32,7 +32,8 @@ a:not(.no-line) {
 	}
 }
 
-a.no-line {
+a.no-line,
+a[href^="#"] {
 	transition: 330ms ease;
 	&:hover,
 	&:active,
