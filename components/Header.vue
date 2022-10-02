@@ -24,7 +24,7 @@
 				</section>
 			</transition>
 		</section>
-		<section id="mission" v-if="isHome">
+		<section id="mission" v-if="route.path === '/'">
 			<h1>{{ page.title }}</h1>
 			<p>{{ page.description }}</p>
 			<pre></pre>
@@ -38,8 +38,9 @@
 
 	// Handle Mission Statement
 	const route = useRoute();
-	const isHome = route.path === "/";
 	const page = await usePage();
+	// const isHome = page._path === "/";
+	// console.log(`🚀 ~ page`, page);
 
 	const menuOpen = ref(false);
 
@@ -47,6 +48,7 @@
 	const lastTop = ref(0);
 	const showing = ref(true);
 	document.body.classList.add("showing");
+
 	watch(vWindow, (val) => {
 		if (val.top > lastTop.value) {
 			showing.value = false;
