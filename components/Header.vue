@@ -24,7 +24,7 @@
 				</section>
 			</transition>
 		</section>
-		<section id="mission" v-if="route.path === '/'">
+		<section id="mission" v-if="page?._path === '/'">
 			<h1>{{ page.title }}</h1>
 			<p>{{ page.description }}</p>
 			<pre></pre>
@@ -34,13 +34,15 @@
 
 <script setup>
 	import { useWindowStore } from "@/stores/window";
+	import { usePageStore } from "@/stores/page";
+
 	import { uid } from "@/composables/uid";
+	import { storeToRefs } from "pinia";
 
 	// Handle Mission Statement
-	const route = useRoute();
-	const page = await usePage();
-	// const isHome = page._path === "/";
-	// console.log(`🚀 ~ page`, page);
+	const pageStore = usePageStore();
+	// pageStore.setPage();
+	const { page } = storeToRefs(pageStore);
 
 	const menuOpen = ref(false);
 

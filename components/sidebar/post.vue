@@ -1,6 +1,6 @@
 <template>
 	<nav id="toc-items">
-		<li v-for="item in toc.links" :key="item.id" class="parent">
+		<li v-for="item in page.body.toc.links" :key="item.id" class="parent">
 			<a :href="`#${item.id}`"> {{ item.text }}</a>
 			<ul v-if="item.children">
 				<li v-for="item in item.children" :key="item.id" class="child">
@@ -12,8 +12,10 @@
 </template>
 
 <script setup>
-	const page = await usePage();
-	const { toc } = page.body;
+	import { usePageStore } from "@/stores/page";
+	import { storeToRefs } from "pinia";
+
+	const { page } = storeToRefs(usePageStore());
 </script>
 
 <style lang="scss">

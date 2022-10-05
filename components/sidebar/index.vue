@@ -1,18 +1,23 @@
 <template>
 	<aside id="side-bar">
-		<sidebar-page v-if="isPage" />
+		<loader v-if="!page" />
 		<template v-else>
-			<h3>Table of Contents</h3>
-			<section id="toc">
-				<sidebar-post />
-			</section>
+			<sidebar-page v-if="page.type === 'page'" />
+			<template v-else>
+				<h3>Table of Contents</h3>
+				<section id="toc">
+					<sidebar-post />
+				</section>
+			</template>
 		</template>
 	</aside>
 </template>
 
 <script setup>
-	const page = await usePage();
-	const isPage = page.type === "page";
+	import { usePageStore } from "@/stores/page";
+	import { storeToRefs } from "pinia";
+
+	const { page } = storeToRefs(usePageStore());
 </script>
 
 <style lang="scss">

@@ -7,6 +7,7 @@
 </template>
 
 <script setup>
+	import { usePageStore } from "@/stores/page";
 	import { useWindowStore } from "@/stores/window";
 	import { throttle } from "@/composables/throttle";
 
@@ -15,6 +16,14 @@
 
 	window.addEventListener("scroll", () => {
 		throttle(vWindow.setTop, 16, isScrollThrottled);
+	});
+
+	const route = useRoute();
+	const pageStore = usePageStore();
+	pageStore.setPage(route.path);
+
+	watch(route, (route) => {
+		pageStore.setPage(route.path);
 	});
 </script>
 <style lang="scss">
