@@ -2,7 +2,7 @@
 	<aside id="side-bar">
 		<loader v-if="!page" />
 		<template v-else>
-			<sidebar-page v-if="page.type === 'page'" />
+			<sidebar-page v-if="page.type !== 'post'" />
 			<template v-else>
 				<h3>Table of Contents</h3>
 				<section id="toc">
@@ -17,19 +17,31 @@
 	import { usePageStore } from "@/stores/page";
 	import { storeToRefs } from "pinia";
 
-	const { page } = storeToRefs(usePageStore());
+	const pageStore = usePageStore();
+	const { page } = storeToRefs(pageStore);
 </script>
 
 <style lang="scss">
 	#side-bar {
 		position: sticky;
-		top: 2rem;
+		top: 2em;
 		transition: 330ms ease-in-out;
+		h3 {
+			margin-top: 0;
+		}
 	}
 
 	.showing {
 		#side-bar {
-			top: calc(2rem + 3.5rem);
+			top: calc(2em + 3.5em);
+		}
+	}
+
+	@media (max-width: $desktop) {
+		.archive-template {
+			#side-bar {
+				display: none;
+			}
 		}
 	}
 </style>

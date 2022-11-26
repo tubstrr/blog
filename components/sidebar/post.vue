@@ -21,10 +21,10 @@
 <style lang="scss">
 	#toc {
 		background: var(--white);
-		padding: 1rem;
+		padding: 1em;
 		background: var(--white);
 		border: 1px solid var(--black);
-		margin-top: 1rem;
+		margin-top: 1em;
 		box-shadow: 1em 1em var(--box-shadow-color);
 		position: relative;
 		transition: var(--transition);
@@ -33,17 +33,18 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
+		font-size: 0.9em;
 
 		li {
 			list-style: none;
 			+ li {
-				margin-top: 0.5rem;
+				margin-top: 0.5em;
 			}
 		}
 
 		.child {
-			margin-left: 0.5rem;
-			margin-top: 0.35rem;
+			margin-left: 0.5em;
+			margin-top: 0.35em;
 		}
 	}
 </style>

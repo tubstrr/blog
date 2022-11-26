@@ -12,11 +12,11 @@
 <style lang="scss">
 	.post-meta {
 		margin-bottom: 0.2em;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.5em;
 		* {
 			text-transform: uppercase;
 			font-size: 1em;
-			color: var(--black);
+			// color: var(--black);
 			opacity: 0.9;
 		}
 

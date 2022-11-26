@@ -23,7 +23,7 @@
 		flex-direction: column;
 		align-items: flex-start;
 		li {
-			margin-top: 1.25rem;
+			margin-top: 1.25em;
 
 			+ li {
 				margin-top: 1em;

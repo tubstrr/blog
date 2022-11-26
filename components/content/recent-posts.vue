@@ -44,7 +44,7 @@
 <style lang="scss">
 	#recent-posts {
 		h2 {
-			margin-bottom: 0.25rem;
+			margin-top: 0;
 		}
 		article {
 			--timing: 250ms;
@@ -53,14 +53,14 @@
 
 			background: var(--white);
 			border: 1px solid var(--black);
-			margin-top: 1rem;
-			margin-right: calc(2rem + 1em);
+			margin-top: 1em;
+			margin-right: calc(2em + 1em);
 			box-shadow: 1em 1em var(--box-shadow-color);
 			position: relative;
 			transition: var(--transition);
 
 			+ article {
-				margin-top: 3rem;
+				margin-top: 3em;
 			}
 
 			&[category="tutorial"] {
@@ -97,18 +97,26 @@
 					transition: var(--transition);
 					transition-delay: 200ms;
 				}
-				padding: 2rem;
+				padding: 2em;
 				display: block;
 
 				.post-meta {
 					margin-bottom: 0.2em;
 					font-size: 0.75em;
-					margin-bottom: 0.5rem;
+					margin-bottom: 0.5em;
 					text-transform: uppercase;
 				}
 				.description {
 					margin-top: 1em;
 				}
+			}
+		}
+	}
+
+	@media (max-width: $desktop) {
+		#recent-posts {
+			article {
+				margin-right: 1em;
 			}
 		}
 	}

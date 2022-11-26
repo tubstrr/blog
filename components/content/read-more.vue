@@ -8,7 +8,7 @@
 
 <style lang="scss">
 	.read-more {
-		margin-top: 0.5rem;
+		margin-top: 0.5em;
 		display: inline-block;
 	}
 </style>

@@ -7,8 +7,8 @@
 
 <style lang="scss">
 	#footer {
-		margin-top: 2rem;
-		padding: 2rem 160px;
+		margin-top: 2em;
+		padding: 2em 160px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -17,6 +17,12 @@
 			// display: block;
 			font-size: 0.8em;
 			font-style: italic;
+		}
+	}
+
+	@media (max-width: $desktop) {
+		#footer {
+			padding: 3em 5vw;
 		}
 	}
 </style>

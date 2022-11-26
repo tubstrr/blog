@@ -1,3 +1,52 @@
+<script setup>
+	import { useWindowStore } from "@/stores/window";
+	import { usePageStore } from "@/stores/page";
+
+	import { uid } from "@/composables/uid";
+	import { storeToRefs } from "pinia";
+
+	const pageStore = usePageStore();
+	const { page } = storeToRefs(pageStore);
+
+	const menuOpen = ref(false);
+
+	const vWindow = useWindowStore();
+	const lastTop = ref(0);
+	const showing = ref(true);
+	document.body.classList.add("showing");
+
+	watch(vWindow, (val) => {
+		if (val.top > lastTop.value) {
+			showing.value = false;
+			document.body.classList.remove("showing");
+		} else {
+			document.body.classList.add("showing");
+			showing.value = true;
+		}
+
+		if (val.top <= 100) document.body.classList.add("top");
+		else document.body.classList.remove("top");
+
+		lastTop.value = val.top;
+	});
+
+	const toggleMenu = () => {
+		menuOpen.value = !menuOpen.value;
+		if (menuOpen.value) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "auto";
+		}
+	};
+
+	const items = [
+		{ title: "Tutorials", link: "/tutorials", color: "blue" },
+		{ title: "Deep Dives", link: "/deep-dives", color: "green" },
+		{ title: "Solutions", link: "/solutions", color: "pink" },
+		{ title: "About", link: "/about", color: "yellow" }
+	];
+</script>
+
 <template>
 	<header id="header" class="container">
 		<section class="top-bar" :class="[{ open: menuOpen }, { showing }]">
@@ -24,223 +73,232 @@
 				</section>
 			</transition>
 		</section>
-		<section id="mission" v-if="page?._path === '/'">
-			<h1>{{ page.title }}</h1>
-			<p>{{ page.description }}</p>
-			<pre></pre>
+		<section id="mission" v-if="page">
+			<template v-if="page.type === 'home'">
+				<h1>{{ page.title }}</h1>
+				<p>{{ page.description }}</p>
+			</template>
+			<template v-else-if="page.type === 'post'">
+				<post-meta :post="page" />
+				<h1>{{ page.title }}</h1>
+				<p class="description" v-html="page.description" />
+			</template>
+			<template v-else-if="page.type === 'archive'">
+				<h1>{{ page.name }}s Archive</h1>
+				<p>Here you'll find all the {{ page.name }} posts</p>
+			</template>
 		</section>
 	</header>
 </template>
 
-<script setup>
-	import { useWindowStore } from "@/stores/window";
-	import { usePageStore } from "@/stores/page";
-
-	import { uid } from "@/composables/uid";
-	import { storeToRefs } from "pinia";
-
-	// Handle Mission Statement
-	const pageStore = usePageStore();
-	// pageStore.setPage();
-	const { page } = storeToRefs(pageStore);
-
-	const menuOpen = ref(false);
-
-	const vWindow = useWindowStore();
-	const lastTop = ref(0);
-	const showing = ref(true);
-	document.body.classList.add("showing");
-
-	watch(vWindow, (val) => {
-		if (val.top > lastTop.value) {
-			showing.value = false;
-			document.body.classList.remove("showing");
-		} else {
-			document.body.classList.add("showing");
-			showing.value = true;
-		}
-
-		lastTop.value = val.top;
-	});
-
-	const toggleMenu = () => {
-		menuOpen.value = !menuOpen.value;
-		if (menuOpen.value) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "auto";
-		}
-	};
-
-	const items = [
-		{ title: "Tutorials", link: "/tutorials", color: "blue" },
-		{ title: "Deep Dives", link: "/deep-dives", color: "green" },
-		{ title: "Solutions", link: "/solutions", color: "pink" },
-		{ title: "About", link: "/about", color: "yellow" }
-	];
-</script>
-
 <style lang="scss">
-	#header {
-		padding: 3rem 160px;
+	#root {
+		&.post-template {
+			#header {
+				background: var(--category-color);
+				margin-bottom: 3em;
+				color: white;
+			}
+		}
+		#header {
+			padding: 3em 160px;
 
-		.top-bar {
-			display: flex;
-			justify-content: space-between;
-
-			position: fixed;
-			z-index: 10;
-			top: -3.5rem;
-			left: 0;
-			width: 100vw;
-			padding: 1rem 160px;
-			background-color: var(--light-blue);
-
-			transition: 350ms ease-in-out;
-
-			.home-link {
-				z-index: 9;
-				color: var(--white);
+			h1 {
+				margin-top: 0;
 			}
 
-			.hamburger {
-				position: relative;
-				z-index: 9;
-				height: 1.5rem;
-				width: 1.5rem;
+			.top-bar {
+				display: flex;
+				justify-content: space-between;
 
-				span {
-					position: absolute;
-					display: block;
-					top: calc((33% * var(--i)) - (0.125rem * var(--i)));
-					right: 0;
+				position: fixed;
+				z-index: 10;
+				top: -3.5em;
+				left: 0;
+				width: 100vw;
+				padding: 1em 160px;
+				background-color: var(--category-color);
 
-					width: 1.25rem;
-					height: 0.125rem;
-					background-color: var(--white);
-					border-radius: 0.1em;
+				transition: 350ms ease-in-out;
 
-					transition: 250ms var(--in-out);
-
-					&.top {
-						--i: 1;
-						--transform: 0, 0.125rem, 0;
-					}
-					&.bottom {
-						--i: 3;
-						--transform: 0, -0.125rem, 0;
-					}
-
-					&.mid {
-						--i: 2;
-						width: 1rem;
-					}
+				.home-link {
+					z-index: 9;
+					color: var(--white);
 				}
 
-				&:hover {
-					span {
-						width: 1.5rem;
-						opacity: 0.7;
-						// &.mid {
-						// }
-					}
-				}
-			}
-
-			&.showing {
-				top: 0;
-			}
-
-			&.open {
 				.hamburger {
 					position: relative;
+					z-index: 9;
+					height: 1.5em;
+					width: 1.5em;
 
 					span {
 						position: absolute;
-						width: 1.5rem;
-						margin-top: 0;
-						transform-origin: center;
+						display: block;
+						top: calc((33% * var(--i)) - (0.125em * var(--i)));
+						right: 0;
 
-						&.top,
+						width: 1.25em;
+						height: 0.125em;
+						background-color: var(--white);
+						border-radius: 0.1em;
+
+						transition: 250ms var(--in-out);
+
+						&.top {
+							--i: 1;
+							--transform: 0, 0.125em, 0;
+						}
 						&.bottom {
-							--i: 2;
-							transform: rotate(-45deg);
+							--i: 3;
+							--transform: 0, -0.125em, 0;
 						}
 
 						&.mid {
-							transform: rotate(45deg);
+							--i: 2;
+							width: 1em;
+						}
+					}
+
+					&:hover {
+						span {
+							width: 1.5em;
+							opacity: 0.7;
+							// &.mid {
+							// }
 						}
 					}
 				}
-			}
 
-			.menu {
-				position: fixed;
-				top: 0;
-				right: 0;
-				background: var(--light-blue);
-				width: 100vw;
-				height: 100vh;
-				z-index: 8;
+				&.showing {
+					top: 0;
+				}
 
-				nav {
-					position: fixed;
-					left: 50%;
-					top: 50%;
-					transform: translate3d(-50%, -50%, 0);
-					display: flex;
-					flex-direction: column;
-					--color: var(--yellow);
+				&.top {
+					font-size: 8em;
+				}
 
-					a {
-						text-align: center;
-						// text-transform: uppercase;
-						color: var(--white);
-						font-weight: 900;
-						font-size: 3rem;
-						-webkit-background-clip: text;
-						-webkit-text-fill-color: transparent;
-						background-image: linear-gradient(
-							to right,
-							var(--white),
-							var(--white),
-							var(--white),
-							var(--color),
-							var(--color),
-							var(--color)
-						);
+				&.open {
+					.hamburger {
 						position: relative;
-						background-size: 500% 100%;
-						background-position: 0 0;
 
-						transition: 500ms ease-in-out;
-						transition-delay: 125ms;
-						+ a {
-							margin-top: 1rem;
-						}
+						span {
+							position: absolute;
+							width: 1.5em;
+							margin-top: 0;
+							transform-origin: center;
 
-						&:hover {
-							background-position: 100% 0;
-							opacity: 1;
+							&.top,
+							&.bottom {
+								--i: 2;
+								transform: rotate(-45deg);
+							}
+
+							&.mid {
+								transform: rotate(45deg);
+							}
 						}
 					}
 				}
+
+				.menu {
+					position: fixed;
+					top: 0;
+					right: 0;
+					background: var(--category-color);
+					width: 100vw;
+					height: 100vh;
+					z-index: 8;
+
+					nav {
+						position: fixed;
+						left: 50%;
+						top: 50%;
+						transform: translate3d(-50%, -50%, 0);
+						display: flex;
+						flex-direction: column;
+						filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.5));
+						--color: var(--yellow);
+
+						a {
+							text-align: center;
+							// text-transform: uppercase;
+							color: var(--white);
+							font-weight: 900;
+							font-size: 3em;
+							-webkit-background-clip: text;
+							-webkit-text-fill-color: transparent;
+							background-image: linear-gradient(
+								to right,
+								var(--white),
+								var(--white),
+								var(--white),
+								var(--color),
+								var(--color),
+								var(--color)
+							);
+							position: relative;
+							background-size: 500% 100%;
+							background-position: 0 0;
+
+							transition: 500ms ease-in-out;
+							transition-delay: 125ms;
+							+ a {
+								margin-top: 1em;
+							}
+
+							&:hover {
+								background-position: 100% 0;
+								opacity: 1;
+							}
+						}
+					}
+				}
+				.menu-enter-active,
+				.menu-leave-active {
+					transform: translate3d(0, calc(-100vw + (1em * 2) + 1.5em), 0);
+					transition: 250ms var(--in-out);
+				}
+				.menu-enter-to,
+				.menu-leave {
+					transform: translate3d(0, 0, 0);
+				}
 			}
-			.menu-enter-active,
-			.menu-leave-active {
-				transform: translate3d(0, calc(-100vw + (1rem * 2) + 1.5rem), 0);
-				transition: 250ms var(--in-out);
-			}
-			.menu-enter-to,
-			.menu-leave {
-				transform: translate3d(0, 0, 0);
+
+			#mission {
+				padding-top: 3em;
+				* {
+					max-width: 75ch;
+				}
 			}
 		}
+	}
 
-		#mission {
-			padding-top: 3rem;
-			* {
-				max-width: 75ch;
+	.top {
+		#root {
+			#header {
+				.top-bar {
+					position: absolute;
+				}
+			}
+		}
+	}
+
+	@media (max-width: $desktop) {
+		#root {
+			#header {
+				padding: 2em 5vw;
+				.top-bar {
+					padding: 1em 5vw;
+
+					.menu {
+						nav {
+							a {
+								font-size: 2em;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
