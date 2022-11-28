@@ -1,6 +1,7 @@
 <template>
 	<section id="root" :class="template" :style="`--category-color:var(--${color});`">
 		<Header />
+		<NuxtLoading />
 		<NuxtPage />
 		<Footer />
 	</section>

@@ -23,15 +23,24 @@ html,
 	background-color: var(--gray);
 	scroll-behavior: smooth;
 	overflow-x: hidden;
-}
 
-.container {
-	width: 100%;
-	padding: 0 160px;
+	.container {
+		width: 100%;
+		padding: 0 160px;
+	}
+
+	ol,
+	ul {
+		list-style-type: auto;
+		margin-left: 1.25em;
+	}
 }
 
 @media (max-width: $desktop) {
-	.container {
-		padding: 0 5vw;
+	html,
+	#root {
+		.container {
+			padding: 0 5vw;
+		}
 	}
 }
