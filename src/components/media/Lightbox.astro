@@ -1,0 +1,86 @@
+---
+const { image, caption, alt } = Astro.props;
+import Icon from "../Icon.astro";
+---
+
+<script>
+	const lightBoxes = document.querySelectorAll(".light-box");
+
+	lightBoxes.forEach((lightBox) => {
+		lightBox.addEventListener("click", () => {
+			lightBox.classList.toggle("opened");
+		});
+	});
+</script>
+
+<section class='light-box'>
+	<Icon type='X' />
+	<div class='wrapper'>
+		<img src={image} alt={alt} />
+		<p>( {caption} )</p>
+	</div>
+</section>
+
+<style lang='scss'>
+	.light-box {
+		position: relative;
+
+		:global(svg) {
+			display: none;
+		}
+
+		.wrapper {
+			cursor: pointer;
+			text-align: center;
+
+			img {
+				max-width: 100%;
+			}
+			p {
+				font-size: 0.8rem;
+				margin-top: 0.2rem;
+			}
+
+			&:hover {
+				opacity: 0.8;
+			}
+		}
+
+		&.opened {
+			:global(svg) {
+				display: block;
+				position: fixed;
+				top: 1rem;
+				right: 1rem;
+				z-index: 999;
+				cursor: pointer;
+				width: 1.5rem;
+				height: 1.5rem;
+			}
+			.wrapper {
+				opacity: 1;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				transform-origin: center center;
+				z-index: 998;
+				background: var(--light-gray);
+				padding: 1rem;
+				border-radius: 0.5rem;
+				box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+
+				img {
+					max-width: 90vw;
+					max-height: 90vh;
+				}
+			}
+		}
+	}
+</style>

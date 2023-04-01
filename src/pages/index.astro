@@ -1,24 +1,11 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Base from "../layouts/Base.astro";
+const title = "The Archive";
+const description =
+	"Here you will find an account of my struggles and successes as a front-end web developer. Well, really it’s just the ones that I’ve taken the time to write about.";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>Welcome to the Archive!</h1>
-			<p>
-				Here you will find an account of my struggles and successes as a front-end web developer. 
-				Well, really it’s just the ones that I’ve taken the time to write about.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Base title={title} description={description}>
+	<h1>Welcome to the Archive!</h1>
+	<p>{description}</p>
+</Base>

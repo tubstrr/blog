@@ -1,0 +1,130 @@
+---
+title: "The Redesign!"
+description: "For my second post, I'm going to document my process for updating this blog."
+pubDate: "April 01 2023 02:30:00 GMT-0600"
+---
+
+import Lightbox from "../../components/media/Lightbox.astro";
+
+## For my second post
+
+I'm going to document my process for updating this blog.
+
+### Step 1: Design it in Figma
+
+This initial blog template is actually pretty close to what I want, it's super minimal, straight to the content.
+I like that a lot! I want it to feel playful and fun though, so I'm going to change up the font's, colors, layout, and
+add some functionality to it. [[SN1-11]](#side-notes)
+
+<br />
+
+<Lightbox
+	image='/images/blog/post/2/initial.jpg'
+	caption='Initial Templates'
+	alt='An image that shows the 3 main initial templates for this blog.'
+/>
+
+<br />
+
+<Lightbox
+	image='/images/blog/post/2/redesigned.jpg'
+	caption='Redeisgned Templates'
+	alt='An image that shows the 3 main redesigned templates for this blog.'
+/>
+
+<br />
+
+## Step 2: Build it
+
+So if you take a look down at the [side notes](#side-notes), you'll see that I've already run into a handful of things
+in learning how to use Astro. I'm going to continue documenting these things as they come up, but for the actual redesign
+process here's how I'm going to tackle it.
+
+1. Gather Assets
+2. Redo the styles / layout
+3. QA and testing
+
+### Gather Assets
+
+To gather assets, I'm going to need to export a few SVG's from Figma, I'll need to download and host the font's we are going
+to use, and then I'll need to copy of the colors from Figma.
+
+There are really only 3 SVG's that we need, the top left, bottom right, and background layer. The easiest way that I've
+found to do this, is to just copy the SVG you want, and drag it off the frame that it's in, then export it. If you're working
+on a design that others are also working on, I'd reccomend making a private copy of the designs so that you can have free
+range to do what you need to do.
+
+Now to grab the fonts! I'm going to use a WebApp that I've created to download the SCSS, and fonts from Google Fonts.
+The webapp is called [static fonts](https://static-fonts.com/), and it's pretty simple to use. You just paste in the Google
+Fonts URL that gets generated when you select the fonts you want, and it'll generate the SCSS, and download the fonts for you.
+
+```
+Example being:
+https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap
+```
+
+Finally, we just need to grab all the colors that are used in the design. I haven't really found a good way of doing this,
+but I just go through the design, and grab all the colors that I see, and add it to a big `.scss` file that I call "variables.scss"
+
+### Redo the styles / layout
+
+Alrighty! Now it's the fun part 😁 To do this, I'm going to first look at the design, and decide how I want this to all
+fit together. I already know that I'm using .md/.mdx to write these posts, so I want to make sure that the styles will
+work without class names an such.
+
+There's the general layout, I'm going to steal [Josh's Full Bleed Grid](https://www.joshwcomeau.com/css/full-bleed/), and then
+I'm going to have to tweak that global layout to make this work. I'm going to start with this border effect, I think that
+I will just use a `::before` on the body, and give it `position: fixed`, that way as you scroll, the frame remains locked
+in place, and creates the illusion of a border. The SVG's are going to be pretty simple, just have the 2 corner ones fixed
+at a `z-index` above the border, and the background one, will probally just be an `::after` on the body, and then I'll
+make it `position: fixed` and `z-index: -1`.
+
+Well, this is a bit of a problem. Astro doesn't have a global layout, so I'm going to have to refactor this. I'm thinking
+I'll try to have a `<Base>` wrapper that holds everything in it. They have a `BlogPost.astro` component that I'm going to
+copy and mutate for my needs.
+
+That seems to work! I've just laid out the base HTML structure for it, and I need to look a bit closer at some of the stuff
+because there's a `FormattedDate` component that I'm not sure how to use yet.
+
+Nice, the `<Icon>` from David Warrington[[R8]](#references) is working amazingly! Have three icons on the DOM, just need
+to move them around.
+
+I think I'm going to have a `Base.scss` file to hold all the styles for establishing this layout.
+
+I had to refine the SVG's a bit, after rotating them in Figma there was a lot of white space around them, so I copied the
+SVG code directly form the DOM back into Figma, and regrouped and exported em' without the white space.[[SN12]](#side-notes)
+
+### Calling it a day!
+
+Have a lot more to do, but I'm calling it quits for right now 😮‍💨
+
+## References:
+
+1. [Astro Docs - framework-components ](https://docs.astro.build/en/core-concepts/framework-components/)
+2. [Astro Docs - markdown-and-mdx-pages ](https://docs.astro.build/en/guides/markdown-content/#markdown-and-mdx-pages)
+3. [John Komarnicki - Introduction To Astro and Vue 3 ](https://www.youtube.com/watch?v=e9NV6mBKe30)
+4. [Astro Docs - styling](https://docs.astro.build/en/guides/styling/)
+5. [Astro Docs - handle-onclick-and-other-events](https://docs.astro.build/en/guides/client-side-scripts/#handle-onclick-and-other-events)
+6. [Astro Docs - astro-components](https://docs.astro.build/en/core-concepts/astro-components/)
+7. [Blog Repo - Lightbox Component](https://github.com/tubstrr/blog/tree/main/src/components/media/Lightbox.astro)
+8. [David Warrington - Using SVGs as Astro components and inline CSS](https://ellodave.dev/blog/article/using-svgs-as-astro-components-and-inline-css/)
+9. [Astro Docs - styling - global-styles](https://docs.astro.build/en/guides/styling/#global-styles)
+10. [Static Fonts](https://static-fonts.com/)
+11. [Josh W. Comeau - Full Bleed Grid](https://www.joshwcomeau.com/css/full-bleed/)
+
+---
+
+## Side Notes:
+
+1. I'm realizing that I need a way to show case images in my posts. I want to show the initial state of the blog, and then the updated state of the blog. So I'm going to have to figure out how to do that. [R1,3](#references)
+2. I'm also noticing that I'm going to need to use .MDX and not just .MD files. [R2](#references)
+3. I also want to figure out how to link to others work and resources to showcase where, and how I learn on the internet. (I can just link in the references 🙄)
+4. These are getting very annoying, and I want to find a way to highlight these interjections without distracting you. Actually, I think I'm just going to leave these in here, and let them fall to the bottom of the post. That way, I can leave them in here, and if you'd like to read em you can!
+5. I want to make the [SNX-X] links clickable, so that you can jump to the side notes. I'm going to have to figure out how to do that. Turns out that MD just makes headers linkable by ID. So this is a non-issue. 😎
+6. As I started to build a "lightbox" component, I realized that I'd need to learn how to use .SCSS in Astro. Turns out it's just baked in and ready to go! [R4](#references) Which is really nice, and I'm a huge fan 😍
+7. In building the lightbox component, I realized that I needed to learn how to make a component reactive in Astro. Which I'm really struggling with. [R5,6](#references) But I'm begging to think, that this is a lot more of a pure JS thing. Let me bark up that tree for a bit.
+8. Okay, that's actually pretty cool! 🤯 Astro wants you to be super basic in the way it handles things. Pretty much, jQuery on steroids because YOU are responsible for all the logic you want to add to your site. For example, take a look at my Lightbox.astro component in the repo. [R7](#references) I can call this component ANY where on the site, and it'll only run this logic 1 time. Which is pretty cool, but it's also an intresting way to think about building components. You have to have a kinda global sense about how and where you want to use them. But you also actually don't lol! State isn't preserved across pages. Each page, is a hard load! 🤯 Which works for blogs and such, but I don't know if I'd like that for a larger project with intense user interactions.
+9. I'm not going to let this stop me! I want this lightbox component to be more useable, and ADA compliant. So I'm going to eventually refactor this logic to allow it to move the lightbox markup, into a global "modal" element, and freeze scroll, and limit keyboard navigation to the modal. But for right now, it'll just explode nice and big. 😎
+10. Okay, I want to have an X button to close the modal right? While I want to be able to use Icons across the site without really thinking about it. I'd love to have something like `<SvgIcon type="{NAME}" />` and then just have Astro handle the rest. I'm going to have to figure out how to do that. (Turns out it's pretty easy! Huge shout out to ""[R8](#references)
+11. Alrighty, I love Astro 😍 Style tags are scoped by default, but it's super easy to target nested components with the `:global()` wrapper 🤯 [R9](#references)
+12. Astro doesn't like when you mess up your styles 😛 `[sass] expected "+", "-", "*", "/", or ")".`

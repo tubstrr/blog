@@ -1,7 +1,7 @@
 ---
 title: "My Very First Post"
 description: "Today is both my 25th birthday and the day that I'm actually going to post my first post."
-pubDate: "April 01 2023"
+pubDate: "April 01 2023 12:30:00 GMT-0600"
 ---
 
 Today is both my 25th birthday and the day that I'm actually going to post my first post.
