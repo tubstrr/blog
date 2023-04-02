@@ -2,6 +2,7 @@
 title: "The Redesign!"
 description: "For my second post, I'm going to document my process for updating this blog."
 pubDate: "April 01 2023 02:30:00 GMT-0600"
+heroImage: "/images/blog/post/2/hero.jpg"
 ---
 
 import Lightbox from "../../components/media/Lightbox.astro";
@@ -94,9 +95,16 @@ I think I'm going to have a `Base.scss` file to hold all the styles for establis
 I had to refine the SVG's a bit, after rotating them in Figma there was a lot of white space around them, so I copied the
 SVG code directly form the DOM back into Figma, and regrouped and exported em' without the white space.[[SN12]](#side-notes)
 
-### Calling it a day!
+The base layout is now styled, and refactored across the site! 😏 I have the `Base.astro` wrapping everything, and then
+at the foot of the `<body>` I have a `<div id="base-decoration">` that's holding all the SVG's. I have a `::before` psuedo
+class on the `<body>` to hold the frame. Then inside the `<div id="base-decoration">` each SVG is wrapped in a `<span>`
+with a class of `fixed`. Then it's just stacking the `z-index`'s to get the right order.
 
-Have a lot more to do, but I'm calling it quits for right now 😮‍💨
+- Background dots = 1
+- `<main>` = 2
+- Top Left && Bottom Right = 998
+
+This creates this depth with both foreground, and background elements. [[SN13]](#side-notes)
 
 ## References:
 
@@ -128,3 +136,4 @@ Have a lot more to do, but I'm calling it quits for right now 😮‍💨
 10. Okay, I want to have an X button to close the modal right? While I want to be able to use Icons across the site without really thinking about it. I'd love to have something like `<SvgIcon type="{NAME}" />` and then just have Astro handle the rest. I'm going to have to figure out how to do that. (Turns out it's pretty easy! Huge shout out to ""[R8](#references)
 11. Alrighty, I love Astro 😍 Style tags are scoped by default, but it's super easy to target nested components with the `:global()` wrapper 🤯 [R9](#references)
 12. Astro doesn't like when you mess up your styles 😛 `[sass] expected "+", "-", "*", "/", or ")".`
+13. This will probally bite me in the butt later on 😮‍💨 `z-index` has a nack for causing weird problems.
