@@ -1,24 +1,23 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../consts";
 ---
 
 <header>
 	<h2>
-		<a href="/">{SITE_TITLE}</a>
+		<a href='/'>{SITE_TITLE}</a>
 	</h2>
 	<nav>
-		<HeaderLink href="/blog">Blog</HeaderLink>
-		<HeaderLink href="/about">About</HeaderLink>
-		<HeaderLink href="https://twitter.com/tubstrr" target="_blank">Twitter</HeaderLink>
-		<HeaderLink href="https://github.com/tubstrr" target="_blank">GitHub</HeaderLink>
+		<HeaderLink href='/blog'>Blog</HeaderLink>
+		<HeaderLink href='/about'>About</HeaderLink>
+		<HeaderLink href='https://twitter.com/tubstrr' target='_blank'>Twitter</HeaderLink>
+		<HeaderLink href='https://github.com/tubstrr' target='_blank'>GitHub</HeaderLink>
 	</nav>
 </header>
-<style>
+<style lang='scss'>
 	header {
-		margin: 0em 0 2em;
-	}
-	h2 {
-		margin: 0.5em 0;
+		h2 {
+			margin: 0.5em 0;
+		}
 	}
 </style>

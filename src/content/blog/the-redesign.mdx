@@ -114,7 +114,14 @@ do some intresting things with JS and CSS var's on the FE. `.scss` Veriables com
 lose the ability to change them on the FE easily. Next, I'm going to create a `typography.scss` file to hold all the
 typography styles.
 
-Now that that's done, I can go in and actually update the header!
+Now that that's done, I can go in and actually update the header! I've realized that I haven't applied my destyle yet 😲
+let me just throw [this](https://github.com/nicolas-cusan/destyle.css) in there. Sweet, that's looking good, although I'm
+seeing a bug with the `z-index` now. I have to change it to:
+
+- Background dots = -1
+- `<main>` = Unset
+- `<body>` = 1
+- Top Left && Bottom Right = 998
 
 ## References:
 
