@@ -1,0 +1,87 @@
+// General Rules
+:root {
+	--base-fs: 16;
+}
+html {
+	font-size: calc(var(--base-fs) * 1px);
+	font-family: var(--prompt);
+	body {
+		* {
+			line-height: 1.45;
+			font-family: inherit;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		@for $i from 1 through 42 {
+			// Generate classes for font sizes from 1 to 42
+			.fs-#{$i} {
+				font-size: calc(#{$i} / var(--base-fs) * 1rem);
+			}
+		}
+		// Class helpers
+		.center {
+			text-align: center;
+		}
+		.ubuntu {
+			font-family: var(--ubuntu);
+			* {
+				font-family: var(--ubuntu);
+			}
+		}
+	}
+}
+
+// Element Rules - And aliases for elements
+h1,
+.h1 {
+	font-size: calc(40 / var(--base-fs) * 1rem);
+	color: var(--blue);
+	font-weight: 600;
+	line-height: 1.223;
+	margin-bottom: 0.714em;
+	font-family: var(--ubuntu);
+}
+
+h2,
+.h2 {
+	font-size: calc(32 / var(--base-fs) * 1rem);
+	line-height: 1.37;
+	margin-bottom: 0.85em;
+	font-weight: 600;
+	font-family: var(--ubuntu);
+}
+
+h3,
+.h3 {
+	font-size: calc(24 / var(--base-fs) * 1rem);
+	font-weight: 600;
+	font-family: var(--ubuntu);
+}
+
+h4,
+.h4 {
+	font-size: calc(20 / var(--base-fs) * 1rem);
+	font-weight: 600;
+	font-family: var(--ubuntu);
+	margin-bottom: 1.333rem;
+}
+h5,
+.h5 {
+	font-size: calc(18 / var(--base-fs) * 1rem);
+	text-transform: uppercase;
+	font-weight: 700;
+	font-family: var(--ubuntu);
+}
+h6,
+.h6 {
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+@media (max-width: 767px) {
+	html {
+		font-size: 12px;
+		body {
+		}
+	}
+}

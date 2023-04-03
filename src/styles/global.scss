@@ -3,7 +3,9 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
+@import "fonts.scss";
 @import "variables.scss";
+@import "typography.scss";
 @import "base-layout.scss";
 
 html {
@@ -22,6 +24,8 @@ body {
 	line-height: 1.5;
 	color: var(--gray);
 
+	font-family: var(--prompt);
+
 	h1,
 	h2,
 	h3,
@@ -30,6 +34,7 @@ body {
 	h6,
 	strong,
 	b {
+		font-family: var(--ubuntu);
 		color: var(--black);
 	}
 	a {

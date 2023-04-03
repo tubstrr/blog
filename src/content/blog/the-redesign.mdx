@@ -106,6 +106,16 @@ with a class of `fixed`. Then it's just stacking the `z-index`'s to get the righ
 
 This creates this depth with both foreground, and background elements. [[SN13]](#side-notes)
 
+Now it's time to refactor the header, footer, content styles, and add the blog post card. I'm going to start with the
+content styles. The first step is to set up some base styles for the font's. The body will use
+`font-family: "Prompt", sans-serif;` and the headings will use `font-family: "Ubuntu", sans-serif;`. I ways like to add
+these as CSS var's in a global `variables.scss` file. This way there's a single spot for all the variables, and we can
+do some intresting things with JS and CSS var's on the FE. `.scss` Veriables compile down to CSS at compilation, so we
+lose the ability to change them on the FE easily. Next, I'm going to create a `typography.scss` file to hold all the
+typography styles.
+
+Now that that's done, I can go in and actually update the header!
+
 ## References:
 
 1. [Astro Docs - framework-components ](https://docs.astro.build/en/core-concepts/framework-components/)
