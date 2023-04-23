@@ -6,6 +6,12 @@ const description =
 ---
 
 <Base title={title} description={description}>
-	<h1>Welcome to the Archive!</h1>
+	<h1 class='title'>Welcome to the Archive!</h1>
 	<p>{description}</p>
 </Base>
+
+<style lang='scss'>
+	h1.title {
+		margin-top: 0;
+	}
+</style>

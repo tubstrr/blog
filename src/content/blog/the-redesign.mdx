@@ -17,23 +17,17 @@ This initial blog template is actually pretty close to what I want, it's super m
 I like that a lot! I want it to feel playful and fun though, so I'm going to change up the font's, colors, layout, and
 add some functionality to it. [[SN1-11]](#side-notes)
 
-<br />
-
 <Lightbox
 	image='/images/blog/post/2/initial.jpg'
 	caption='Initial Templates'
 	alt='An image that shows the 3 main initial templates for this blog.'
 />
 
-<br />
-
 <Lightbox
 	image='/images/blog/post/2/redesigned.jpg'
 	caption='Redeisgned Templates'
 	alt='An image that shows the 3 main redesigned templates for this blog.'
 />
-
-<br />
 
 ## Step 2: Build it
 
@@ -123,6 +117,43 @@ seeing a bug with the `z-index` now. I have to change it to:
 - `<body>` = 1
 - Top Left && Bottom Right = 998
 
+Alrighty! Now it's time to make this actually readable, and enjoyable. Here's what I'm looking at right now lol
+
+<Lightbox
+	image='/images/blog/post/2/ugly.png'
+	caption='An ugly state of this blog'
+	alt="This image is a screenshot of this blog as I'm developing it, and it's ugly."
+/>
+
+- **Step 1: Adding the grid**<br />
+  I've mentioned the grid above, but I haven't actually put it in yet haha! Containing the content to about 65ch will
+  really help with readibilty, and make the site feel a lot more modern.
+- **Step 2: Adding some nice typography!**<br />
+  Typography can not be overstated, it really is the lifeblood of any site, and can make something look great, or horrible.
+  I'm not a designer, so I know I'm not making the best descicion here, but I've built enough sites to know what not to do.
+- **Step 3: See if I like it**<br/>
+  Now that these 2 things are setup, I'm going to just read through this blog post and see if anything stands out to me
+  that needs to be tweaked. This is a step that I don't really know how to break down and descibe, but it's just a gut check.
+  Does anything look "wrong", or "off"? If so, I try to figure out why, and then fix it.<br /> <br />
+  **_Things that I've noticed:_** [[SN14]](#side-notes)<br />
+  1. The header spacing
+  2. The spacing below a `block` and the next headline element
+  3. The background on the `lightbox block`
+
+### Fine tune mobile
+
+At this point, I'm pretty happy with the desktop experiance. There's a lot that I want to add, and tighten up, but I'll
+get to that when I get to that! Right now, there's a few things that I need to fix on mobile. Namely the floating icons
+just eat up the whole screen. I really do like them, but I think on mobile I need to tone them down a good bit.
+
+I think I'll remove the one on the bottom, and then make the one on the top a bit smaller, so that it still adds some color
+but it isn't as distracting.
+
+## That's all folks!
+
+At this point, I'm ready to start making blog posts, and filling in some content! Again, there's a lot that I want to do,
+but it'll take time, and I'll get there! 😬
+
 ## References:
 
 1. [Astro Docs - framework-components ](https://docs.astro.build/en/core-concepts/framework-components/)
@@ -154,3 +185,4 @@ seeing a bug with the `z-index` now. I have to change it to:
 11. Alrighty, I love Astro 😍 Style tags are scoped by default, but it's super easy to target nested components with the `:global()` wrapper 🤯 [R9](#references)
 12. Astro doesn't like when you mess up your styles 😛 `[sass] expected "+", "-", "*", "/", or ")".`
 13. This will probally bite me in the butt later on 😮‍💨 `z-index` has a nack for causing weird problems.
+14. The header: [before](/images/blog/post/2/header.png) & [after](/images/blog/post/2/header-after.png) The lightbox: [before](/images/blog/post/2/lightbox.png) & [after](/images/blog/post/2/lightbox-after.png)

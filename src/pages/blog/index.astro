@@ -11,16 +11,21 @@ const posts = (await getCollection("blog")).sort((a, b) => a.data.pubDate.valueO
 	title='All Posts | The Archive'
 	description="Helpful articles the showcase the journey of a devloper's strugles, and sucsess"
 >
-	<section>
-		<ul>
-			{
-				posts.map((post) => (
-					<li>
-						<FormattedDate date={post.data.pubDate} />
-						<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
-					</li>
-				))
-			}
-		</ul>
-	</section>
+	<h1 class='title'>All Posts</h1>
+	<ul>
+		{
+			posts.map((post) => (
+				<li>
+					<FormattedDate date={post.data.pubDate} />
+					<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+				</li>
+			))
+		}
+	</ul>
 </Base>
+
+<style lang='scss'>
+	h1.title {
+		margin-top: 0;
+	}
+</style>

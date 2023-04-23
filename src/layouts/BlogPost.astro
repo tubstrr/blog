@@ -5,6 +5,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import Lightbox from "../components/media/Lightbox.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -12,8 +13,15 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <Base title={title} description={description}>
-	<article>
-		{heroImage && <img width={720} height={360} src={heroImage} alt='' />}
+	<article class='full-bleed blog-template'>
+		<!-- {heroImage && <img class='full-bleed' width={1000} height={540} src={heroImage} alt='' />} -->
+		{
+			heroImage && (
+				<div class='blog-post-hero full-bleed'>
+					<Lightbox image={heroImage} alt={`Hero image for ${title} blog post.`} />
+				</div>
+			)
+		}
 		<h1 class='title'>{title}</h1>
 		<FormattedDate date={pubDate} />
 		{
@@ -27,3 +35,20 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<slot />
 	</article>
 </Base>
+
+<style lang='scss'>
+	.blog-template {
+		.blog-post-hero {
+			:global(section.light-box) {
+				margin: 0;
+				background: transparent;
+				padding: 0;
+				overflow: hidden;
+			}
+		}
+
+		.title {
+			margin-bottom: 0;
+		}
+	}
+</style>

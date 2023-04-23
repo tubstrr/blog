@@ -1,5 +1,5 @@
 ---
-const { image, caption, alt } = Astro.props;
+const { image, caption, alt, title } = Astro.props;
 import Icon from "../Icon.astro";
 ---
 
@@ -13,17 +13,23 @@ import Icon from "../Icon.astro";
 	});
 </script>
 
-<section class='light-box'>
+<section class='light-box full-bleed'>
+	{title && <h2>{title}</h2>}
 	<Icon type='X' />
 	<div class='wrapper'>
 		<img src={image} alt={alt} />
-		<p>( {caption} )</p>
+		{caption && <p>( {caption} )</p>}
 	</div>
 </section>
 
 <style lang='scss'>
 	.light-box {
 		position: relative;
+		background: white;
+		padding: 2rem;
+		border-radius: 0.5rem;
+		padding-bottom: 1rem;
+		box-shadow: 0px 10px 15px -10px var(--line);
 
 		:global(svg) {
 			display: none;
@@ -32,13 +38,16 @@ import Icon from "../Icon.astro";
 		.wrapper {
 			cursor: pointer;
 			text-align: center;
+			margin-top: 0;
+			transition: 300ms;
 
 			img {
 				max-width: 100%;
+				border-radius: 0.25rem;
 			}
 			p {
 				font-size: 0.8rem;
-				margin-top: 0.2rem;
+				margin-top: 1rem;
 			}
 
 			&:hover {

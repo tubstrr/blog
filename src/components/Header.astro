@@ -4,9 +4,9 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-	<h2>
+	<strong class='h2'>
 		<a href='/'>{SITE_TITLE}</a>
-	</h2>
+	</strong>
 	<nav>
 		<HeaderLink href='/blog'>Blog</HeaderLink>
 		<HeaderLink href='/about'>About</HeaderLink>
@@ -16,8 +16,11 @@ import { SITE_TITLE } from "../consts";
 </header>
 <style lang='scss'>
 	header {
-		h2 {
-			margin: 0.5em 0;
+		padding-bottom: 2em;
+		margin-bottom: 1em;
+		border-bottom: 1px solid var(--line);
+		nav {
+			margin-top: 0;
 		}
 	}
 </style>

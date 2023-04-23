@@ -1,4 +1,5 @@
 body {
+	// Colors
 	--white: #edeeef;
 	--true-white: #fff;
 	--black: #1a2330;
@@ -15,6 +16,10 @@ body {
 	--yellow-green: #c1cb8b;
 	--purple: #646da6;
 
+	// Fonts
 	--ubuntu: "Ubuntu", sans-serif;
 	--prompt: "Prompt", sans-serif;
+
+	// Helpers
+	--line: rgba(26, 35, 48, 0.2);
 }
