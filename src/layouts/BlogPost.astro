@@ -1,9 +1,6 @@
 ---
 import Base from "./Base.astro";
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Lightbox from "../components/media/Lightbox.astro";
 
@@ -14,11 +11,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <Base title={title} description={description}>
 	<article class='full-bleed blog-template'>
-		<!-- {heroImage && <img class='full-bleed' width={1000} height={540} src={heroImage} alt='' />} -->
 		{
 			heroImage && (
 				<div class='blog-post-hero full-bleed'>
-					<Lightbox image={heroImage} alt={`Hero image for ${title} blog post.`} />
+					<Lightbox eager={true} image={heroImage} alt={`Hero image for ${title} blog post.`} />
 				</div>
 			)
 		}

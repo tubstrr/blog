@@ -1,5 +1,6 @@
 ---
-const { image, caption, alt, title } = Astro.props;
+const { image, caption, alt, title, eager } = Astro.props;
+const loading = eager ? "eager" : "lazy";
 import Icon from "../Icon.astro";
 ---
 
@@ -17,7 +18,7 @@ import Icon from "../Icon.astro";
 	{title && <h2>{title}</h2>}
 	<Icon type='X' />
 	<div class='wrapper'>
-		<img src={image} alt={alt} />
+		<img src={image} alt={alt} loading={loading} />
 		{caption && <p>( {caption} )</p>}
 	</div>
 </section>
